@@ -18,10 +18,10 @@ public class Fitness {
 
     public double evaluate(String text) { // returns quality of text
         char a, b;
-        double sum = 0, len = text.length() - 1;
+        double sum = 0, length = text.length() - 1;
         double[][] tab = new double[Constants.ALPHA_NUM][Constants.ALPHA_NUM];
 
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < length; i++) { // get bigrams from text
             a = text.charAt(i);
             b = text.charAt(i+1);
             tab[a-Constants.OFFSET][b-Constants.OFFSET]++;
@@ -29,7 +29,8 @@ public class Fitness {
 
         for (int i = 0; i < Constants.ALPHA_NUM; i++) {
             for (int j = 0; j < Constants.ALPHA_NUM; j++) {
-                sum += Math.abs(ref[i][j] - (tab[i][j] / len));
+                // get distance of text bigrams from original english bigrams and sum them
+                sum += Math.abs(ref[i][j] - (tab[i][j] / length));
             }
         }
 

@@ -27,11 +27,12 @@ public class CaesarCipher {
         return decrypted.toString();
     }
 
-    private char getEncryptSub(char ch) {
-        return (char)((((ch - 'a') + key) % Constants.ALPHA_NUM) + 'a');
+    private char getEncryptSub(char ch) { // get char substitute after shift for encryption
+        return (char)((((ch - Constants.OFFSET) + key) % Constants.ALPHA_NUM) + Constants.OFFSET);
     }
 
-    private char getDecryptSub(char ch) { // java have problem with negative modulo
-        return (char)((((ch - 'a') - key + Constants.ALPHA_NUM) % Constants.ALPHA_NUM) + 'a');
+    private char getDecryptSub(char ch) { // get char substitute after shift for decryption
+        // java have problem with negative modulo (solution: 1. +mod, 2. %mod)
+        return (char)((((ch - Constants.OFFSET) - key + Constants.ALPHA_NUM) % Constants.ALPHA_NUM) + 'a');
     }
 }

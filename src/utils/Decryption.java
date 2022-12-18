@@ -18,23 +18,23 @@ public class Decryption {
     }
 
     public void decrypt() {
-        createSbList();
+        createOffsetList();
 
         StringBuilder key = new StringBuilder();
 
-        for(StringBuilder sb : offsetList) {
-            Integer bestShift = ceasarSolver.solve(sb.toString());
+        for(StringBuilder offset : offsetList) {
+            Integer bestShift = ceasarSolver.solve(offset.toString());
             key.append(getCharShift(bestShift));
         }
 
-        System.out.println(new VigenereCipher(key.toString()).decrypt(ct));
+        System.out.println("\nkey: " + key + "\nplain text: " + new VigenereCipher(key.toString()).decrypt(ct));
     }
 
     private char getCharShift(int shift) {
         return (char)(shift + Constants.OFFSET);
     }
 
-    private void createSbList() { // init and fill list
+    private void createOffsetList() { // define and fill offset list
         for (int i = 0; i < keyLength; i++) {
             offsetList.add(new StringBuilder());
         }
